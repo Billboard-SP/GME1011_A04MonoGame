@@ -124,6 +124,39 @@ namespace GME1011_A04MonoGame
                 }
             }
 
+            // and then they started blasting
+            foreach (var enemy in enemies)
+            {
+                enemy.Update(gameTime, projectiles, projectileTexture);
+            }
+
+            for (int i = projectiles.Count - 1; i >= 0; i--)
+            {
+                projectiles[i].Update(gameTime);
+
+                if (projectiles[i].isFromPlayer)
+                {
+                    for (int j = enemies.Count - 1; j >= 0; j--)
+                    {
+                        if (projectiles[i].Bounds.Intersects(enemies[j].Bounds))
+                        {
+                            enemies[j].Health -= projectiles[i].Damage;
+                            projectiles.RemoveAt(j);
+                            if (enemies[j].health <= 0)
+                            {
+                                enemies.RemoveAt(j);
+                                score += 10;
+
+                                // power up upon commiting a crime
+                                if (RandomFloat() < 0.1f)
+                                    powerUps.Add(new PowerUp(powerUpTexture, enemies[j].Position));
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+
             base.Update(gameTime);
         }
 
