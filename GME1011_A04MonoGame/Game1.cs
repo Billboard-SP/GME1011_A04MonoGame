@@ -174,6 +174,38 @@ namespace GME1011_A04MonoGame
                 }
 
                 // power up logic
+                for (int k = powerUps.Count - 1; k >= 0; k--)
+                {
+                    powerUps[k].Update(gameTime);
+                    if (powerUps[k].Bounds.Intersects(player.Bounds))
+                    {
+                        if (powerUps[k].Type == PowerUpType.ExtraLife)
+                            lives++;
+                        else if (powerUps[k].Type == PowerUpType.SpeedBoost)
+                        {
+                            player.Speed *= 2f;
+                            player.SpeedBoostTime = 5f;
+                        }
+                        powerUps.RemoveAt(k);
+                    }
+                    else if (powerUps[k].Position.Y > _graphics.PreferredBackBufferHeight)
+                    {
+                        powerUps.RemoveAt(k);
+                    }
+                }
+
+                if (player.SpeedBoostTime > 0)
+                {
+                    player.SpeedBoostTime -= elapsed;
+                    if (player.SpeedBoostTime <= 0)
+                        player.Speed /= 2f;
+                }
+
+                if (enemies.Count == 0)
+                {
+                    wave++;
+                    SpawnWave(wave);
+                }
             }
 
             base.Update(gameTime);
@@ -181,7 +213,7 @@ namespace GME1011_A04MonoGame
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
 
