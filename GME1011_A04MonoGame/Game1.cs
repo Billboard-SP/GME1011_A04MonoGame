@@ -106,7 +106,22 @@ namespace GME1011_A04MonoGame
                     {
                         changeDirection = true;
                     }
-                }    
+                }   
+                
+                if (changeDirection)
+                {
+                    enemyMoveDirection *= -1;
+                    foreach (var enemy in enemies)
+                    {
+                        enemy.Position += new Vector2(0, 20);
+
+                        if (enemy.Position.Y + enemy.Texture.Height >= player.Position)
+                        {
+                            // lose sceneario
+                            lives = 0;
+                        }
+                    }
+                }
             }
 
             base.Update(gameTime);
