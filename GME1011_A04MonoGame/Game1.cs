@@ -21,6 +21,8 @@ namespace GME1011_A04MonoGame
         int score = 0;
         int lives = 3;
 
+        bool isGameOver = false;
+
         float enemyMoveTimer = 0f;
         float enemyMoveInterval = 0.5f;
         int enemyMoveDirection = 1;
@@ -118,7 +120,7 @@ namespace GME1011_A04MonoGame
                         if (enemy.Position.Y + enemy.Texture.Height >= player.Position)
                         {
                             // lose sceneario
-                            lives = 0;
+                            isGameOver = true;
                         }
                     }
                 }
@@ -155,6 +157,23 @@ namespace GME1011_A04MonoGame
                         }
                     }
                 }
+                else
+                {
+                    if (projectiles[i].Bounds.Intersects(player.Bounds))
+                    {
+                        lives--;
+                        projectiles.RemoveAt(i);
+                        if (lives <= 0)
+                        {
+                            isGameOver = true;
+                        }
+                    }
+
+                    if (i < projectiles.Count && (projectiles[i].Position.Y < -projectiles[i].Texture.Height || projectiles[i].Position.Y > _graphics.PreferredBackBufferHeight))
+                        projectiles.RemoveAt(i);
+                }
+
+                // power up logic
             }
 
             base.Update(gameTime);
