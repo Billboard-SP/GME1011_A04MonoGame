@@ -15,7 +15,7 @@ namespace GME1011_A04MonoGame
         public Texture2D Texture;
         public Vector2 Position;
         public PowerUpType Type;
-        public float Speed = 5f;
+        public float Speed = 15f;
         public Rectangle Bounds => new((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height);
 
         public PowerUp(Texture2D texture, Vector2 position)

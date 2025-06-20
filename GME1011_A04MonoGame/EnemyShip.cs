@@ -33,7 +33,7 @@ namespace GME1011_A04MonoGame
                 if (rng.NextDouble() < 0.3) // 30% chance to shoot when cooldown expires
                 {
                     Vector2 projPos = new(Position.X + Texture.Width / 2 - projectileTexture.Width / 2, Position.Y + Texture.Height);
-                    projectiles.Add(new Projectile(projectileTexture, projPos, new Vector2(0, 3f), false));
+                    projectiles.Add(new Projectile(projectileTexture, projPos, new Vector2(0, 1f), false));
                 }
 
                 ResetCooldown();
