@@ -228,7 +228,9 @@ namespace GME1011_A04MonoGame
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
 
-            player.Draw(_spriteBatch);
+            if (!isGameOver)
+                player.Draw(_spriteBatch);
+
             foreach (var enemy in enemies)
                 enemy.Draw(_spriteBatch);
             foreach (var proj in projectiles)
