@@ -117,7 +117,7 @@ namespace GME1011_A04MonoGame
                     {
                         enemy.Position += new Vector2(0, 20);
 
-                        if (enemy.Position.Y + enemy.Texture.Height >= player.Position)
+                        if (enemy.Position.Y + enemy.Texture.Height >= player.Position.Y)
                         {
                             // lose sceneario
                             isGameOver = true;
@@ -136,7 +136,7 @@ namespace GME1011_A04MonoGame
             {
                 projectiles[i].Update(gameTime);
 
-                if (projectiles[i].isFromPlayer)
+                if (projectiles[i].IsFromPlayer)
                 {
                     for (int j = enemies.Count - 1; j >= 0; j--)
                     {
@@ -144,7 +144,7 @@ namespace GME1011_A04MonoGame
                         {
                             enemies[j].Health -= projectiles[i].Damage;
                             projectiles.RemoveAt(j);
-                            if (enemies[j].health <= 0)
+                            if (enemies[j].Health <= 0)
                             {
                                 enemies.RemoveAt(j);
                                 score += 10;
