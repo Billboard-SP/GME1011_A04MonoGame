@@ -216,6 +216,29 @@ namespace GME1011_A04MonoGame
             GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
+            _spriteBatch.Begin();
+
+            player.Draw(_spriteBatch);
+            foreach (var enemy in enemies)
+                enemy.Draw(_spriteBatch);
+            foreach (var proj in projectiles)
+                proj.Draw(_spriteBatch);
+            foreach (var pu in powerUps)
+                pu.Draw(_spriteBatch);
+
+            _spriteBatch.DrawString(font, $"Score: {score}", new Vector2(10, 10), Color.White);
+            _spriteBatch.DrawString(font, $"Lives: {lives}", new Vector2(10, 30), Color.White);
+            _spriteBatch.DrawString(font, $"Wave: {wave}", new Vector2(10, 50), Color.White);
+
+            if (isGameOver)
+            {
+                string message = "GAME OVER\nPress Enter to Restart";
+                Vector2 size = font.MeasureString(message);
+                Vector2 pos = new Vector2(400 -  size.X / 2, 300 - size.Y / 2);
+                _spriteBatch.DrawString(font, message, pos, Color.Red);
+            }
+
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }
