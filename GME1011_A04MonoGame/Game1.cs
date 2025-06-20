@@ -10,6 +10,22 @@ namespace GME1011_A04MonoGame
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
+        PlayerShip player;
+        List<EnemyShip> enemies = new();
+        List<Projectile> projectiles = new();
+        List<PowerUp> powerUps = new();
+
+        Texture2D playerTexture, enemyTexture, projectileTexture, powerUpTexture;
+        SpriteFont font;
+
+        int score = 0;
+        int lives = 3;
+
+        float enemyMoveTimer = 0f;
+        float enemyMoveInterval = 0.5f;
+        int enemyMoveDirection = 1;
+
+        int wave = 1;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
