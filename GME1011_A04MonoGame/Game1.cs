@@ -87,6 +87,14 @@ namespace GME1011_A04MonoGame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            if (isGameOver)
+            {
+                if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+                {
+                    RestartGame();
+                }
+            }
+
             // TODO: Add your update logic here
 
             player.Update(gameTime, projectiles, projectileTexture);
