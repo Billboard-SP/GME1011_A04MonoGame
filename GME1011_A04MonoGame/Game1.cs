@@ -47,6 +47,11 @@ namespace GME1011_A04MonoGame
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            playerTexture = Content.Load<Texture2D>("player");
+            enemyTexture = Content.Load<Texture2D>("enemy");
+            projectileTexture = Content.Load<Texture2D>("projectile");
+            powerUpTexture = Content.Load<Texture2D>("powerup");
+            font = Content.Load<SpriteFont>("Arial");
         }
 
         protected override void Update(GameTime gameTime)
