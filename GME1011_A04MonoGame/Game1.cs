@@ -242,5 +242,21 @@ namespace GME1011_A04MonoGame
 
             base.Draw(gameTime);
         }
+
+        private void RestartGame()
+        {
+            isGameOver = false;
+            lives = 3;
+            score = 0;
+            wave = 1;
+            player.Position = new Vector2(400, 500);
+            projectiles.Clear();
+            powerUps.Clear();
+            enemies.Clear();
+            SpawnWave(wave);
+        }
+
+        private static readonly System.Random rnd = new();
+        private float RandomFloat() => (float)rnd.NextDouble();
     }
 }
