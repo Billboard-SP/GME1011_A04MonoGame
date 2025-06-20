@@ -58,12 +58,56 @@ namespace GME1011_A04MonoGame
             SpawnWave(wave);
         }
 
+        void SpawnWave(int waveNumber)
+        {
+            enemies.Clear();
+
+            int rows = 3 + waveNumber;
+            int cols = 7;
+            float startX = 100;
+            float startY = 50;
+            float spacingX = 60;
+            float spacingY = 50;
+
+            for (int row = 0; row < rows; row++)
+            {
+                for (int col = 0; col < cols; col++)
+                {
+                    Vector2 pos = new Vector2(startX + col * spacingX, startY + row * spacingY);
+                    EnemyShip enemy = new EnemyShip(enemyTexture, pos);
+                    enemies.Add(enemy);
+                }
+            }
+        }
+
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
             // TODO: Add your update logic here
+
+            player.Update(gameTime, projectiles, projectileTexture);
+
+            float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            // enemy move timer
+            enemyMoveTimer += elapsed;
+            if (enemyMoveTimer > enemyMoveInterval)
+            {
+                enemyMoveTimer = 0;
+                bool changeDirection = false;
+
+                foreach (var enemy in enemies)
+                {
+                    enemy.Position += new Vector2(10 * enemyMoveDirection, 0);
+
+                    if (enemy.Position.X > _graphics.PreferredBackBufferWidth - enemy.Texture.Width || enemy.Position.X < 0)
+                    {
+                        changeDirection = true;
+                    }
+                }    
+            }
 
             base.Update(gameTime);
         }
