@@ -52,6 +52,10 @@ namespace GME1011_A04MonoGame
             projectileTexture = Content.Load<Texture2D>("projectile");
             powerUpTexture = Content.Load<Texture2D>("powerup");
             font = Content.Load<SpriteFont>("Arial");
+
+            player = new PlayerShip(playerTexture, new Vector2(400, 500));
+
+            SpawnWave(wave);
         }
 
         protected override void Update(GameTime gameTime)
