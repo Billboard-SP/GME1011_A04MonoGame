@@ -143,15 +143,17 @@ namespace GME1011_A04MonoGame
                         if (projectiles[i].Bounds.Intersects(enemies[j].Bounds))
                         {
                             enemies[j].Health -= projectiles[i].Damage;
-                            projectiles.RemoveAt(j);
+                            projectiles.RemoveAt(i);
+
                             if (enemies[j].Health <= 0)
                             {
+                                Vector2 deathPos = enemies[j].Position;
                                 enemies.RemoveAt(j);
                                 score += 10;
 
                                 // power up upon commiting a crime
                                 if (RandomFloat() < 0.1f)
-                                    powerUps.Add(new PowerUp(powerUpTexture, enemies[j].Position));
+                                    powerUps.Add(new PowerUp(powerUpTexture, deathPos));
                             }
                             break;
                         }
