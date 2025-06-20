@@ -31,6 +31,8 @@ namespace GME1011_A04MonoGame
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            _graphics.PreferredBackBufferWidth = 800;
+            _graphics.PreferredBackBufferHeight = 600;
         }
 
         protected override void Initialize()
